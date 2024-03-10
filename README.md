@@ -4,7 +4,7 @@
 
 Welcome to the wonderful world of software engineering, the modern world's wizardry guild, where incantations and arcane knowledge form the day-to-day, mythical forefathers have legends written about them and the holy grail of AGI has been 10 years away for the past 100 years. This document will be an evolving list of resources/suggested learning topics that I deem important for becoming a software engineer, as well as complementary topics to be more well rounded. 
 
-Software engineering is an enormous field with a wide range of niches and sub-fields, each with their relevant lore, coding practices, preferred languages, useful algorithms, math, etc. and it is not feasible for me to cover all of it, primarily due to lack of knowledge, hence this document will be more focused on learning the necessary to become a typical "backend" engineer, one of the most common types of engineer in entreprise and elligible to get that sweet big tech gig, or work for a variety of large institutions as well as a lot of startups and SMEs. Other types of software engineers might be "systems" engineers who work at a lower ["level of abstraction"](https://en.wikipedia.org/wiki/Abstraction_(computer_science)) (i.e. "closer to the metal") - they often do more "hardcore" work using more math, fancy data structures and algos, think deeply about performance - and frontend engineers who do web development, think about UX, accessibility and work closely with designers. Note that software engineering is a completetly separate function from entreprise IT which handles things like managing the company's internal network infrastructure, employee credentials, devices and system administration and are very concerned about security.
+Software engineering is an enormous field with a wide range of niches and sub-fields, each with their relevant lore, coding practices, preferred languages, useful algorithms, math, etc. and it is not feasible for me to cover all of it, primarily due to lack of knowledge, hence this document will be more focused on learning the necessary to become a typical "backend" engineer, one of the most common types of engineer in entreprise and elligible to get that sweet big tech gig, or work for a variety of large institutions as well as a lot of startups and SMEs. Other types of software engineers might be "systems" engineers who work at a lower ["level of abstraction"](https://en.wikipedia.org/wiki/Abstraction_(computer_science)) (i.e. "closer to the metal") - they often do more "hardcore" work using more math, fancy data structures and algos, think deeply about performance - frontend engineers who do web development, think about UX, accessibility and work closely with designers and mobile engineers who build applications for mobile devices, writing "native" Android or iOS applications, or cross platform applications using technologies like React Native. Note that software engineering is a completetly separate function from entreprise IT which handles things like managing the company's internal network infrastructure, employee credentials, devices and system administration and are very concerned about security.
 
 Backend engineers write server code that powers the backend of applications and deal with flows of data to and from clients. A backend engineer can call themselves "full-stack" should they also learn enough front-end to implement their features end-to-end. Backend engineers mostly write "services" (server programs) defining useful APIs (set of functions you can invoke on the services - the program's interface) to serve data to their clients. These services often work together with other services (often in a microservice architecture - as opposed to monolithic) implementing separation of concern, as well as interacting with data stores. Backend engineers generally write code in [type-safe](https://en.wikipedia.org/wiki/Type_safety), [compiled](https://en.wikipedia.org/wiki/Compiler) languages like Java (and other JVM based languages like Kotlin, Scala), C++, Rust, Go, etc. with a target platform (the runtime environment) of a [UNIX-based](https://en.wikipedia.org/wiki/Unix) server (technically if you're using a JVM language, the target platform is the JVM but what I mean is your code is going to run on a UNIX server). Engineers also write automated tests to ensure the code does what it is supposed to, and to catch potential regressions when that code evolves. They use version control systems and repositories to collaborate with other programmers and manage the evolution and storage of code.
 
@@ -33,7 +33,7 @@ A list of topics with overview and relevant resources follows. Don't worry if yo
 
 ### Abstractions, APIs and implementations. 
 
-Everything you interact with in software is an abstraction offering an API. An abstraction needs a concrete implementation - the code that actually defines the functionality. 
+Everything you interact with in software is an [abstraction](https://en.wikipedia.org/wiki/Abstraction_(computer_science)) offering an [API](https://en.wikipedia.org/wiki/API). An abstraction needs a concrete implementation - the code that actually enables the functionality. 
 For example, reading and writing files involves using the file API offered by the OS and implemented by the file system which is an abstraction over storage devices. When writing object-oriented code, you can define abstract classes and interfaces which define the set of methods offered by all implementations of these interfaces and classes.
 
 
@@ -42,21 +42,19 @@ For example, reading and writing files involves using the file API offered by th
 Similarly to abstractions and APIs, almost everything in software can be viewed through the lens of a server and a client. The terms are commonly used to refer to web servers and clients but they are more of a conceptual view of anything returning (serving) data (of any kind) to something that has requested it (client). E.g. a program calling using the file API to open a file is a client and the file-system is the server. Client-server is often used in opposition to peer-to-peer systems, but really each peer is simply able to act as both a server and a client depending on the situation. 
 
 
-
-
 # Topics
 
 # UNIX - OS internals and the Shell
 
 ## Overview
 
-An OS virtualizes and provides abstractions of the computer's physical resources, most notably the CPU, the memory and the storage, but also network interfaces and peripherals. OSes are conceptually split in 2 layers: the kernel - which is the core of the OS and interacts directly with the physical resources, and "user-space" which is a set of higher level abstractions that non-kernel programs (userspace programs) interact with. The layer between the two is called the system call (syscall) interface - the kernel's API are the system calls. 
+An OS virtualizes and provides abstractions of the computer's physical resources, most notably the CPU, the memory and the storage, but also network interfaces and peripherals. OSes are conceptually split in 2 layers: the kernel the core of the OS that interfaces directly with the physical resources, and ["user-space"](https://en.wikipedia.org/wiki/User_space_and_kernel_space) which is where all non-kernel prgorams execute. The layer between the two is the system call (syscall) interface - the kernel's API are the system calls. 
 
 We're mostly concerned with UNIX-based operating systems, which more or less follow the [POSIX API](https://en.wikipedia.org/wiki/POSIX), a standardized set of APIs for operating systems. The term UNIX is historical and used loosely to refer to all [Unix-like](https://en.wikipedia.org/wiki/Unix-like) systems, including [Linux](https://en.wikipedia.org/wiki/Linux), which is an open-source kernel invented by legendary programmer and [flamer](https://news.ycombinator.com/item?id=39191899) Linus Torvalds. Most UNIX-like OSes use the linux kernel (e.g. Ubuntu, Fedora, Redhat) so you can use the terms interchangeably.
 
-When you log into your OS with your mouse and keyboard, you are actually running a window-manager graphical user interace (GUI) program that is calling a ton of system calls to allow you and the other programs you launch to do their jobs. Another classic way of interacting with an OS is through a [shell](https://en.wikipedia.org/wiki/Shell_(computing)), which is a command-line interface (also called a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), a terminal). The shell is itself a program: an interpretor for a scripting language, which allows a user to enter commands, launch other programs and write scripts to automate the shell. The shell interpretor is the one calling the kernel API behind the scenes, it merely offers an abstraction to the user. The common shell for unix systems is [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) and the others are mostly compatible, mostly becasue using a shell well involves calling other standard programs like find, grep, curl.
+When you log into your OS with your mouse and keyboard, you are actually running a window-manager graphical user interace (GUI) program that is making a ton of system calls to allow you and the other programs you launch to do their jobs. Another classic way of interacting with an OS is through a [shell](https://en.wikipedia.org/wiki/Shell_(computing)), which is a command-line interface (also called a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), a terminal). The shell is itself a program: an interpreter for a scripting language, which allows a user to enter commands, launch other programs and write scripts to automate the shell. The shell interpretor is the one calling the kernel API behind the scenes, it merely offers an abstraction to the user. The common shell for unix systems is [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)).
 
-Most UNIX-like OSes are written in C, making it the de-facto OS programming language. It is also infamous for being 'unsafe' and allowing a lot of 'footguns' leading to crashes and a huge amounts of security vulnerabilities. Nowadays, evangelical Rust users (the rust-aceans) push their language as a memory-safe alternative, because the Rust language has facilities that avoid a large class of bugs present in memory unsafe languages. [Memory safety](https://en.wikipedia.org/wiki/Memory_safety) refers to having to manually manage (allocate/deallocate) memory, which is notoriously hard to do at a large scale and handling pointers to memory locations directly (the `char*`). Pointers can be complicated to reason about especially because you often have pointers to pointers (e.g. `char**`) and have mostly been hidden (abstracted away) in more modern programming languages. But it's intersting to know that higher-level languages like Java and Python are often themselves written in C behind the scenes (see [CPython](https://github.com/python/cpython) or [this post](https://stackoverflow.com/questions/1220914/in-which-language-are-the-java-compiler-and-jvm-written)).
+Most UNIX-like OSes are written in C, making it the de-facto OS programming language. It is also infamous for being 'unsafe' and allowing a lot of 'footguns' leading to crashes and a huge amounts of security vulnerabilities. Nowadays, evangelical Rust users (rustaceans) push their language as a memory-safe alternative, because the Rust language has facilities that avoid a large class of bugs present in memory unsafe languages. [Memory safety](https://en.wikipedia.org/wiki/Memory_safety) refers to having to manually manage (allocate/deallocate) memory, which is notoriously hard to do at a large scale and handling pointers to memory locations directly (e.g. `char*`). Pointers can be complicated to reason about especially because you often have pointers to pointers (e.g. `char**`) and have thus been hidden (abstracted away) in more modern programming languages. But it's interesting to know that higher-level languages are often themselves written in C (see [CPython](https://github.com/python/cpython) or [this post](https://stackoverflow.com/questions/1220914/in-which-language-are-the-java-compiler-and-jvm-written)).
 
 
 Additional:
@@ -79,16 +77,15 @@ An alternative is to get a linux VM (or dual boot). Get [VMware player](https://
 On mac, which is closer to unix than windows, you can use the built-in terminal, but I don't know how to get a C environment running (maybe gcc is available out of the box?), else use VirtualBox.
 
 
-
 ## Shell 101
 
-First, you'll need to learn how to use a terminal. Do (at least) the [Command Line tutorial](https://linuxjourney.com/lesson/the-shell) followed by the [Text-Fu tutorial](https://linuxjourney.com/lesson/stdout-standard-out-redirect), [Advanced Text-Fu](https://linuxjourney.com/lesson/regular-expressions-regex), [Processes] (https://linuxjourney.com/lesson/monitor-processes-ps-command), [Permissions](https://linuxjourney.com/lesson/file-permissions) - for this one you just need to know how to make a script you wrote executable (`chmod 755`). 
+First, you'll need to learn how to use a terminal. Do (at least) the [Command Line tutorial](https://linuxjourney.com/lesson/the-shell) followed by the [Text-Fu tutorial](https://linuxjourney.com/lesson/stdout-standard-out-redirect), [Advanced Text-Fu](https://linuxjourney.com/lesson/regular-expressions-regex), [Processes] (https://linuxjourney.com/lesson/monitor-processes-ps-command), [Permissions](https://linuxjourney.com/lesson/file-permissions). 
 
-After this you should know how to move around, create, read, edit, delete files, know what stdin/stdout/stderr are, how to pipe together different programs (let me know if not covered), what `.`, `..`, `/`, `~`, `|`, `grep` are and more. Realize that `echo`, `ls`, `cp`, `grep`, `vim`, `cat`, etc. (though not `cd`) are [all programs](https://stackoverflow.com/questions/11528267/how-do-i-read-the-source-code-of-shell-commands) (generally written in C, but could be anything) that you are invoking from bash (they should be in `/usr/bin`). They are part of the POSIX standard and you can see their source code online here: https://github.com/coreutils/coreutils/tree/master/src. You should also know what what the man pages are and how to get help about commands from the temrinal directly.
+After this you should know how to move around, create, read, edit, delete files, know what stdin/stdout/stderr are, how to pipe together different programs, what `.`, `..`, `/`, `~`, `|`, `grep` are and more. Realize that `echo`, `ls`, `cp`, `grep`, `vim`, `cat`, etc. (though not `cd`) are [all programs](https://stackoverflow.com/questions/11528267/how-do-i-read-the-source-code-of-shell-commands) (generally written in C, but could be anything) that you are invoking from bash (they should be in `/usr/bin`). They are part of the POSIX standard and you can see their source code online here: https://github.com/coreutils/coreutils/tree/master/src. You should also know what what the man pages are and how to get help about commands from the temrinal directly.
 
 
 Additional:
-- Readup on the standard directory structure: https://www.theochem.ru.nl/~pwormer/Knowino/knowino.org/wiki/Unix_directory_structure.html
+- Readup on the standard UNIX directory structure: https://www.theochem.ru.nl/~pwormer/Knowino/knowino.org/wiki/Unix_directory_structure.html
 - Fun fact: the equivalent of deleting system32 for linux is `sudo rm -rf /`.
 
 
@@ -103,7 +100,7 @@ Required reading:
 
 The rest is highly recommended but obviously it's a whole textbook so it would take a long time, I have not read it fully.
 
-To do the coding examples, e.g. [https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf) see the [Setup a C dev environment](#setup-a-c-dev-environment) section. C is syntactically very similar to Java, Javascript and a lot of other languages (because it is their ancestor).
+To do the coding examples, e.g. [https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf) see the [Setup a C dev environment](#setup-a-c-dev-environment) section. C is the ancestor to lots of other languages and is thus syntactically similar. 
 
 
 In parallel, you can follow the [Process monitoring tutorial](https://linuxjourney.com/lesson/tracking-processes-top) to peek inside what's happening in the OS. I think the book shows off some of these tools in the examples as well.
@@ -156,43 +153,85 @@ Additional:
 
 
 
-# Coding
+# Programming Languages
+
+## Langugages 101
+
+
+At the lowest level, CPUs understand electrical signals which are the [physical representation](https://www.quora.com/What-actually-converts-machine-code-or-binary-code-to-an-electric-signal) of binary digits (high/low voltage for 1/0), specific patterns of parallel binary digits invokes circuitry defining operations like loading data (also electrical signals representing bits representing data). The set of operations the CPU can execute defines its [instruction set architecture (ISA)](https://en.wikipedia.org/wiki/Instruction_set_architecture) (hilariously referred to as abstract and the CPU as the implementation in the linked wiki article), and a listing of binary instructions is called [machine code](https://en.wikipedia.org/wiki/Machine_code). Common ISAs today are [x86](https://en.wikipedia.org/wiki/X86) and [ARM64](https://en.wikipedia.org/wiki/AArch64). [Assembly language](https://en.wikipedia.org/wiki/Assembly_language), is a (slightly more human readable) representation of the machine code, where instruction codes (opcodes) are replaced by keywords (e.g. load, store, jump) and the possibilty of using symbolic labels. A lot of early coding was done in assembly, and today still, if you specialize in reverse engineering malware, cracking software or working on core (to the operation of the modern world) software like [FFmpeg](https://twitter.com/FFmpeg/status/1762632400255742353) you might spend a lot of time reading and/or writing assembly. 
+
+"High-level" (it's all relative) programming languages like [Fortran](https://en.wikipedia.org/wiki/Fortran) and C were then invented throughout the 20th century to facilitate computer programming. [Programming languages](https://en.wikipedia.org/wiki/Programming_language) are also abstract constructs defining a syntax and semantics to write computer programs, hence languages also need implementations, which will take care of converting it to machine code so the CPU can execute it. Langugage implementations are [compilers or interpreters](https://stackoverflow.com/questions/6889747/is-python-interpreted-or-compiled-or-both) and sometimes a runtime environment (like the JVM, or .NET runtime).
+
+Languages come in different flavors such as [imperative, declarative](https://en.wikipedia.org/wiki/Programming_paradigm), [functional](https://en.wikipedia.org/wiki/Functional_programming) (apparently a subcategory of declarative programming, TIL). Another axis of comparison is if a language is statically typed (the implementation checks BEFORE running, so at compile time, that all functions are called on the appropriate data types avoiding a lot of type errors at runtime) or [dynamically typed](https://stackoverflow.com/questions/1517582/what-is-the-difference-between-statically-typed-and-dynamically-typed-languages) (e.g. Python where nothing will stop you from running a completely non-sensical program like `a = "main" / 56` and will instead throw a type error when running).
+
+To learn more about programming languages, you should study compilers and interpreters. One of the practice projects below is actually following the [Crafting Interpreters book](https://www.craftinginterpreters.com/).
 
 
 ## Languages to learn
 
-I would recommend learning Java and Python. They are consistently at the top of the [most used and requested programming languages](https://spectrum.ieee.org/the-top-programming-languages-2023) and are not going anywhere. They provide a good diversity of languages as Java is statically typed, compiled, object-oriented language while Python is interpreted and dynamically typed (and also object-oriented). Java is widely used in entreprise and big tech as it is highly portable (because it targets the JVM which is supported on many target systems) and everybody kinda knows it. Python is widely used for scripting tasks, web development backend, data science and ML and is known to be more user firendly though the dynamic typing makes it harder to work on large codebases.
+Which language to learn depends mostly on the specific type of work you are doing as there tends to be favorites in different subfields. The favorite is mostly historical fact and maintained by the presence of a large ecosystem of libraries making the use of another langugage less convenient.
 
-Nowadays, you have other JVM-languages which target the JVM, and can use it's wide ecosystem but are more ergonomic or implement different programming styles - see Scala and Kotlin. 
-
-You can probably get away with learning just Python nowadays, but most jobs will want a Java equivalent (it could be C# which is microsoft's version of Java - targets the .NET runtime (JVM))
-
-JVM vs JDK vs JRE: https://stackoverflow.com/questions/11547458/what-is-the-difference-between-jvm-jdk-jre-openjdk
-
-What is the JVM?
-What is an interpreter?
-
-Languages are interpreted or compiled (simplification - look into JIT compilation). Langugages need to be implemented (you could say there are abstractions as well I guess!!)- for an interpreted langugage the implementation is an interpreter, for a compiled langugage it is a compiler. These implementations can be written in other languages, or the langugages themselves (weird but true).  
+I would recommend learning Java and Python. They are consistently at the top of the [most used and requested programming languages](https://spectrum.ieee.org/the-top-programming-languages-2023) and are not going anywhere. They provide a good diversity of languages as Java is statically typed, compiled, object-oriented language while Python is interpreted and dynamically typed (and also object-oriented). Java is widely used in entreprise and big tech as it is highly portable (because it targets the JVM which is supported on many target systems) and its relatively standardized C-like syntax means all programmers can read and write it. Python is widely used for scripting tasks, web development backend, data science and ML and is known to be more user firendly though the dynamic typing makes it harder to work on large codebases.
 
 
-Concurrency - running things in parrallel 
-- python multiprocessing
-- threads API java
+## Java 
+
+Java, the [ubiquitous](https://skeptics.stackexchange.com/questions/9870/do-3-billion-devices-run-java) langugage that developers [love to hate](https://www.reddit.com/r/programming/comments/9dzpu/ask_reddit_why_does_everyone_hate_java/) is a staple of entreprise software development for various reasons including its [good performance](https://stackoverflow.blog/2021/02/22/choosing-java-instead-of-c-for-low-latency-systems/), [static type checking](https://en.wikipedia.org/wiki/Type_system#:~:text=Static%20type%20checking%20is%20the,properties%20for%20all%20possible%20inputs.), portability and large ecosystem. I found this [short video](https://www.youtube.com/watch?v=Ibjm2KHfymo) to give a nice high-level overview.
+
+Something to know about Java is that it compiles to Java "bytecode" which runs on the Java Virtual Machine (JVM) instead of the OS itself (like a C program would). This is the source of its portability as you don't need to recompile Java bytecode between different platforms (e.g. Windows vs Linux) as long as both can run the JVM. Note that the JVM itself has to be compiled for each platform though. There are other languages which compile to the JVM, like [Kotlin](https://kotlinlang.org/docs/getting-started.html) and Scala, which offer more "flexible" languages compared to Java's rigid verbose writing style. These other JVM language are able to interoperate with the Java ecosystem since they share the same platform. Note that Java (and mostly Kotlin nowadays) are the languages of Android development should that interest you.
+
+There are many versions of Java, old ones are confusingly referred to as e.g. Java 8, but are really version 1.8 when you download the JDK. We're up to version 21 now.
+
+A similar programming language is C# by Microsoft, it's also object-oriented, statically typed, also targets a virtual machine (the .NET runtime) which also has supports other languages like F#. It's used a lot in Europe apparently, as well as to code in Unity and it is well loved by it's users.
 
 
 
+### Setting up a Java dev environment
 
-Recursion?
+The best IDE for Java is [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/). If you still have access to a university email, you can get the Ultimate version for free ,else get the Community edition. Then you will need a Java SDK (Software Development Kit), you most likely already have one on your machine, otherwise I believe you can download some directly from IntelliJ. If not, you can find some links [here](https://www.jetbrains.com/help/idea/sdk.html#jdk). The JDK comes with the JRE (Java Runtime Environment - which is the JVM as far as I understand it) and a Java compiler (`javac`). 
 
 
-LANGUAGES   
-- Compiled vs Interpreted
-- Static vs dynamic typing
-- type systems why its useful
-- variable scope - private, package private
-- packages, imports, build systems, dependency management
-- libraries
-- frameworks - maybe Spring? Django
+### Learning Java
+
+At a very high-level, [this video](https://www.youtube.com/watch?v=TE3LyYW-AHQ) lays an overall map of the land for entreprise Java, that can be referred to as you progress. It'd be nice to at least google each of the items in this map (though not now). The database related stuff will also be covered in another section of this guide.
+
+To start, go through the [official tutorials](https://docs.oracle.com/javase/tutorial/). Do the whole "Trails Covering the Basics" section. Yes it will be a bit boring but it will give you the basics of programming (in Java but also generally in imperative OO languages) as well as refer to OS concepts like file APIs and concurrency, and cover some of the most important data structures, like lists (arrays) and maps. 
+
+
+Then, you should find some simple project tutorials to follow along. All found starting [here](https://www.reddit.com/r/learnprogramming/wiki/faq/#wiki_where_can_i_find_practice_exercises_and_project_ideas.3F).
+
+- Writing a [simple HTTP server](https://javarevisited.blogspot.com/2015/06/how-to-create-http-server-in-java-serversocket-example.html) - bonus of learning about networking APIs and the internet.
+- Writing [a simple web server using the Spring MVC framework](https://spring.io/guides/gs/serving-web-content). Spring is a widely used web application framework. [MVC (Model-View-Controller)](https://developer.mozilla.org/en-US/docs/Glossary/MVC) is a common web app design pattern (code organization method) where Models define the data received and sent to clients, Views define how the Models are shown to clients (in web, the views are web page [templates](https://www.baeldung.com/spring-template-engines) - which are rendered with the Model's values to give the final result shown in the browser) and Controllers define the various endpoints, handle requests and implement the business logic.
+- Now [interact with a MySQL database](https://spring.io/guides/gs/accessing-data-mysql). Instead of writing raw SQL queries, web app developers will often use ORMs (Object Relational Mappers) which are libraries directly linking java objects to database records. So you only operate on objects and the changes get persisted (saved) to the DB. ORMs are frequently criticized for leading to suboptimal SQL however, and having ORMs is not an excuse to not learn SQL - it is extremely useful to know.
+- MORE SPRING - learn what a REST API is: https://spring.io/guides/gs/rest-service. It is just an API using HTTP verbs like GET, POST, UPDATE - often used in to communicate with both clients and between services. 
+
+Adavanced Projects:
+- Read and follow along the [Crafting Interpreters book](https://www.craftinginterpreters.com/contents.html). You will learn a ton about data structures and programming languages this way, and it's much more interesting than Spring webapps. HIGHLY RECOMMEND - taking a compilers course if often a defining moment in a CS degree where a lot of stuff clicks.
+
+Other projects:
+- [These projects](https://aosabook.org/en/index.html) also seem interesting. They are implemented in Python so the exercise would be to translate the code to Java. It might make you appreciate the differences between the two.
+
+Additional:
+
+- JVM vs JDK vs JRE: https://stackoverflow.com/questions/11547458/what-is-the-difference-between-jvm-jdk-jre-openjdk
+- Deep dive on Java build systems (Maven and Gradle): https://news.ycombinator.com/item?id=38875318
+
+
+## Python
+
+Python is similar to Java because it is also object-oriented but is generally considered more of a 'scripting' language due to its dynamic typing and more interpreted nature (it's actually also (Just-in-Time) compiled to bytecode and runs in a VM but that is a detail). Coming from Java, you might appreciate its ergonomics and its relative ease of writing, in a styler sometimes closer to english. It also has its quirks however, e.g. the program entrypoint being just as cryptic as Java (`if __name__ == '__main__':`).
+
+It has some cool features like [list comprehensions](https://realpython.com/list-comprehension-python/).
+
+
+### Setup a python dev environment.
+
+Easy, you should already have python installed. I like to use VSCode for python development, you could also use PyCharm (also from Jetbrains) but I find it clunky. `pip` is the default package manager and you will often use it to install librairies.
+
+
+
+
+
 
 
 WRITING CODE    
@@ -200,13 +239,23 @@ WRITING CODE
  - code style
  - linters and formatters
 
+ # Databases
+
+ ## SQL
+
+ ## NoSQL
+
+ 
 
 ## System Design and Architecture
 
-This is hard to get experience in as most personal projects don't need anywhere near the kind of complexity that is used in big entreprise. 
+This is hard to get practical experience in as most personal projects don't need anywhere near the kind of complexity that is used in big entreprise. Therefore, I've personally mostly learned it by watching videos and reading big companies' engineering blogs.
 
 Understand system architecture of common apps
---> bytedance channel
+- Bytebytego youtube channel: https://www.youtube.com/watch?v=M4lR_Va97cQ&list=PLCRMIe5FDPseVvwzRiCQBmNOVUIZSSkP8
+- https://www.youtube.com/watch?v=R_agd5qZ26Y
+- https://www.youtube.com/watch?v=_K-eupuDVEc
+
 
 data stores - file system, databases (relational or "NoSQL")
 
