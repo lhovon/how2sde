@@ -18,6 +18,8 @@ To get a job in big tech, you will need to know how to passibly use 1 or 2 progr
 
 A list of topics with overview and relevant resources follows. Don't worry if you don't understand all the terms, it's meant to have you be exposed to the lingo and imbibe with all the lore, you'll be able to come back and udnerstand more things as you progress. I'll also put some wiki links, I recommend to quickly read the first couple of paragraphs for extra context. The best way to learn this stuff is to use it and dive deep as you go along, staying curious. Some resources will contain exercises, others are interactive, and others can have project suggestions. You should go through the guide in order.
 
+The hardest thing about self-studying is keeping the motivation for the extended duration needed. Given a few hours a week and depnding on how familiar you are with the concepts evoked, it might take a few months to a year (or more) to fully cover the material. In person bootcamps are another alternative to break into the field and are a great way to keep yourself motivated, some even try to land you a job at the end. Define you goals and keep them in mind as you progress.
+
 
 
 ## Industry sources of information
@@ -191,7 +193,7 @@ Need to know:
 
 ### Setting up a Java dev environment
 
-The best IDE for Java is [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/). If you still have access to a university email, you can get the Ultimate version for free ,else get the Community edition. Then you will need a Java SDK (Software Development Kit), you most likely already have one on your machine, otherwise I believe you can download some directly from IntelliJ. If not, you can find some links [here](https://www.jetbrains.com/help/idea/sdk.html#jdk). The JDK comes with the JRE (Java Runtime Environment - which is the JVM as far as I understand it) and a Java compiler (`javac`). \
+The best IDE for Java is [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/). If you still have access to a university email, you can get the Ultimate version for free ,else get the Community edition. Then you will need a Java SDK (Software Development Kit), you most likely already have one on your machine, otherwise I believe you can download some directly from IntelliJ. If not, you can find some links [here](https://www.jetbrains.com/help/idea/sdk.html#jdk). The JDK comes with the JRE (Java Runtime Environment - which is the JVM as far as I understand it) and a Java compiler (`javac`).
 
 You can code Java on Windows with no problem - see the portability difference between needing a separate OS to setup a C coding environement.
 
@@ -288,18 +290,19 @@ This is where it gets a little mathematical, with the use of [big-O notation](ht
 
 I would suggest going through the [Blind 75](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions) list of the necessary problems to prepare for interview. Ideally, you do one a day and spend some time researching the solution, come back to it later, try to solve it again. There is a ton of content, notably from [Neetcode](https://www.youtube.com/c/neetcode), and [video courses from MiT](https://www.youtube.com/watch?v=ZA-tUyM_y7s&list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY), Stanford, etc. to really get a deep understanding, proofs, etc. which could be worthwhile as a deep dive.
 
-Need to know:
+Need to know decently:
 - Recursion/Divide and Conquer
 - How to use maps to speed up problems
 - Binary search
 - Sorting algorithms
 - What a Tree is, what a heap is
 - Graph traversal algorithms - BFS, DFS
+- shortest path - djisktra's algorithm
 - Dynamic programming (similar to recursion)
 
 Good to know:
 - Tries - for language related tasks
-- 
+- datastrucutres for geographic systems
 
 
 # Databases
@@ -328,7 +331,7 @@ Cassandra DB https://cassandra.apache.org/_/cassandra-basics.html
 
 
 
-## System Design and Architecture
+## System Design and Architecture, infrastructure
 
 This is hard to get practical experience in as most personal projects don't need anywhere near the kind of complexity that is used in big entreprise. Therefore, I've personally mostly learned it by watching videos and reading big companies' engineering blogs.
 
@@ -339,59 +342,17 @@ Understand system architecture of common apps
 
 
 Good to know (at least conceptually):
-- What is a container, how is it different from a VM
-- What is a VPC
+- What is a VM: https://www.redhat.com/en/topics/virtualization/what-is-a-virtual-machine
+- What is EC2: https://www.quora.com/How-does-EC2-work-Im-interested-in-learning-about-the-specific-infrastructure-that-makes-EC2-work-For-example-are-instances-actual-discrete-machines-or-are-they-totally-virtualized-e-g-one-quad-core-machine-could-run-4-micro-EC2-instances
+- What is a container, how is it different from a VM: https://www.youtube.com/watch?v=0qotVMX-J5s
 - What is a container orchestrater (like Kubernetes)
-- 
+- What are serverless functions: https://www.youtube.com/watch?v=97q30JjEq9Y
+- Horizontal vs Vertical scaling
+
+
 
 Additional reading:
 - The tail at scale: https://www.barroso.org/publications/TheTailAtScale.pdf
 
 
-L33t h4cks:
 
-
-
-
-### Internet
-
-https://linuxjourney.com/lesson/what-is-dns
-
-
-
-- Setup this repo, run the thing and implement something/fix a bug.
-
-- built a scraper and store stuff in a database then generate reports
-
-- learn file and network APIs
-
-- what is an API
-
-- learn OS fundamentals: virtualization of CPU, memory and storage
-
-- learn git 
-
-
-coding basics:
-- variables
-- control flow
-- exception handling
-
-
-UNIX Command line
-
-SQL basics
-
-Scaling basics
-
-Type system
-
-Data structures/Algorthims 
-- lists
-- maps
-- graphs
-- stack, queue
-
-coding projects
-- CRUD app with backend API
-- 
