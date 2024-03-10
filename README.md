@@ -16,7 +16,7 @@ This brings us to the final aspect of backend development: infrastructure and op
 
 To get a job in big tech, you will need to know how to passibly use 1 or 2 programming languages, know the basics of UNIX and be comfortable at a terminal (sometimes evaluated at interview), have some general knowledge about networking, infrastrucure, system architecture (rarely evaluated at interview), know how to learn quickly (languages, new software - comes with experience - not evaluated but needed to keep the job lol) and be able to solve [leet code](https://leetcode.com/problemset/) easy and mediums (hards are rarely used, in fact the meme is that the solution to all interview questions is to use a hashmap). Leet code is often lamented as the software grind, with dev hopefuls spending tens of hours practicing (and neglecting everything else, such as proper hygiene), while at the same time being the least relevant skill to perform the actual job. It is unfortunately a fact of the industry, although some smaller companies omit them entirely, replace them with take-home assignments or more job-relevant tasks. However I think that for someone wanting to break into the field, it could kill two birds with one stone and serve as the basis to learn about data structures and algorithms (skipping the job-irrelevant stuff you learn in a degree) while also working towards getting a job.
 
-A list of topics with overview and relevant resources follows. Don't worry if you don't understand all the terms, it's meant to have you be exposed to the lingo and imbibe with all the lore, you'll be able to come back and udnerstand more things as you progress. I'll also put some wiki links, I recommend to quickly read the first couple of paragraphs for extra context. The best way to learn this stuff is to use it. Some resources will contain exercises, others are interactive, and others can have project suggestions. I highly recommend to work on a few personnal projects to explore various technologies, since they will invariably lead to learning new things and I'll try to suggest a few. I also recommend going over all the topics before starting any subsection to get an overview.
+A list of topics with overview and relevant resources follows. Don't worry if you don't understand all the terms, it's meant to have you be exposed to the lingo and imbibe with all the lore, you'll be able to come back and udnerstand more things as you progress. I'll also put some wiki links, I recommend to quickly read the first couple of paragraphs for extra context. The best way to learn this stuff is to use it and dive deep as you go along, staying curious. Some resources will contain exercises, others are interactive, and others can have project suggestions. You should go through the guide in order.
 
 
 
@@ -83,7 +83,6 @@ First, you'll need to learn how to use a terminal. Do (at least) the [Command Li
 
 After this you should know how to move around, create, read, edit, delete files, know what stdin/stdout/stderr are, how to pipe together different programs, what `.`, `..`, `/`, `~`, `|`, `grep` are and more. Realize that `echo`, `ls`, `cp`, `grep`, `vim`, `cat`, etc. (though not `cd`) are [all programs](https://stackoverflow.com/questions/11528267/how-do-i-read-the-source-code-of-shell-commands) (generally written in C, but could be anything) that you are invoking from bash (they should be in `/usr/bin`). They are part of the POSIX standard and you can see their source code online here: https://github.com/coreutils/coreutils/tree/master/src. You should also know what what the man pages are and how to get help about commands from the temrinal directly.
 
-
 Additional:
 - Readup on the standard UNIX directory structure: https://www.theochem.ru.nl/~pwormer/Knowino/knowino.org/wiki/Unix_directory_structure.html
 - Fun fact: the equivalent of deleting system32 for linux is `sudo rm -rf /`.
@@ -110,6 +109,9 @@ Additional:
 - The Unix API is more than just system calls or Posix (2018): https://news.ycombinator.com/item?id=32032588
 - Stack vs Heap: https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap
 - Data vs Code: https://wiki.c2.com/?DataAndCodeAreTheSameThing
+- https://news.ycombinator.com/item?id=39657991
+- Skim through linux kernel source code online, try to see if you can understand what's going on: https://elixir.bootlin.com/linux/v5.6/source/fs/read_write.c#L446. Here it's code for the Virtual File System (VFS) layer - see if you can intuit what that means. https://tldp.org/LDP/khg/HyperNews/get/fs/vfstour.html
+
 
 ### Setup a C dev environment
 Ubuntu already comes with `gcc` so no need to install, you can skip ahead to writing code.
@@ -142,9 +144,9 @@ gcc helloworld.c
 ```
 
 
-## Shell 102
+## Shell 102 
 
-Learn to use `ssh` - the secure shell - to remotely connect to systems. In practice you will often do this. For example, you connect to the production server from you laptop, or you connect to a crazy datacenter cluster from your laptop to run a computationally intensive job. ssh will drop you into an interactive shell.
+Learn to use `ssh` - the secure shell - to remotely connect to systems. In practice you will often do this. For example, you connect to the production server from you dev laptop, or you connect to a crazy datacenter cluster to run a computationally intensive job. ssh will drop you into an interactive shell on the target machine.
 
 To practice this, I suggest playing [these capture the flag games](https://overthewire.org/wargames/). This will have a dual purpose to practice your shell-fu as well as learn about security topics, should you want to specialize into that after. The world of security is extremely cool and you can do security a both an extremely low level (reverse engineering binaries, finding and exploiting security vulnerabilities in code) where you'll learn to read ans speak hex fluently, or at a very high institutional policy level, and anything in between.
 
@@ -156,7 +158,6 @@ Additional:
 # Programming Languages
 
 ## Langugages 101
-
 
 At the lowest level, CPUs understand electrical signals which are the [physical representation](https://www.quora.com/What-actually-converts-machine-code-or-binary-code-to-an-electric-signal) of binary digits (high/low voltage for 1/0), specific patterns of parallel binary digits invokes circuitry defining operations like loading data (also electrical signals representing bits representing data). The set of operations the CPU can execute defines its [instruction set architecture (ISA)](https://en.wikipedia.org/wiki/Instruction_set_architecture) (hilariously referred to as abstract and the CPU as the implementation in the linked wiki article), and a listing of binary instructions is called [machine code](https://en.wikipedia.org/wiki/Machine_code). Common ISAs today are [x86](https://en.wikipedia.org/wiki/X86) and [ARM64](https://en.wikipedia.org/wiki/AArch64). [Assembly language](https://en.wikipedia.org/wiki/Assembly_language), is a (slightly more human readable) representation of the machine code, where instruction codes (opcodes) are replaced by keywords (e.g. load, store, jump) and the possibilty of using symbolic labels. A lot of early coding was done in assembly, and today still, if you specialize in reverse engineering malware, cracking software or working on core (to the operation of the modern world) software like [FFmpeg](https://twitter.com/FFmpeg/status/1762632400255742353) you might spend a lot of time reading and/or writing assembly. 
 
@@ -184,11 +185,23 @@ There are many versions of Java, old ones are confusingly referred to as e.g. Ja
 
 A similar programming language is C# by Microsoft, it's also object-oriented, statically typed, also targets a virtual machine (the .NET runtime) which also has supports other languages like F#. It's used a lot in Europe apparently, as well as to code in Unity and it is well loved by it's users.
 
-
+Need to know:
+- Inheritance and Composition - bread and butter of OOP
+- Dependency Injection (conceptually)
 
 ### Setting up a Java dev environment
 
-The best IDE for Java is [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/). If you still have access to a university email, you can get the Ultimate version for free ,else get the Community edition. Then you will need a Java SDK (Software Development Kit), you most likely already have one on your machine, otherwise I believe you can download some directly from IntelliJ. If not, you can find some links [here](https://www.jetbrains.com/help/idea/sdk.html#jdk). The JDK comes with the JRE (Java Runtime Environment - which is the JVM as far as I understand it) and a Java compiler (`javac`). 
+The best IDE for Java is [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/). If you still have access to a university email, you can get the Ultimate version for free ,else get the Community edition. Then you will need a Java SDK (Software Development Kit), you most likely already have one on your machine, otherwise I believe you can download some directly from IntelliJ. If not, you can find some links [here](https://www.jetbrains.com/help/idea/sdk.html#jdk). The JDK comes with the JRE (Java Runtime Environment - which is the JVM as far as I understand it) and a Java compiler (`javac`). \
+
+You can code Java on Windows with no problem - see the portability difference between needing a separate OS to setup a C coding environement.
+
+
+### Git
+
+Git is a version control system (VCS), if you don't already have it on your machine download it here (git bash for windows): https://git-scm.com/downloads
+You don't need to understand it much more than `git clone`, `git checkout -b new-branch`, `git branch -a`, `git add .`, `git restore .`, `git commit -m "my commit message`, `git push`, `git pull`, `git pull --rebase`, what `.gitignore` is.
+
+Create a new repository on github and follow instructions to be able to push your code! (You will need to setup ssh keys or a github token to be able to push code nowadays I believe - an opportunity to learn about `ssh-keygen`!)
 
 
 ### Learning Java
@@ -204,6 +217,7 @@ Then, you should find some simple project tutorials to follow along. All found s
 - Writing [a simple web server using the Spring MVC framework](https://spring.io/guides/gs/serving-web-content). Spring is a widely used web application framework. [MVC (Model-View-Controller)](https://developer.mozilla.org/en-US/docs/Glossary/MVC) is a common web app design pattern (code organization method) where Models define the data received and sent to clients, Views define how the Models are shown to clients (in web, the views are web page [templates](https://www.baeldung.com/spring-template-engines) - which are rendered with the Model's values to give the final result shown in the browser) and Controllers define the various endpoints, handle requests and implement the business logic.
 - Now [interact with a MySQL database](https://spring.io/guides/gs/accessing-data-mysql). Instead of writing raw SQL queries, web app developers will often use ORMs (Object Relational Mappers) which are libraries directly linking java objects to database records. So you only operate on objects and the changes get persisted (saved) to the DB. ORMs are frequently criticized for leading to suboptimal SQL however, and having ORMs is not an excuse to not learn SQL - it is extremely useful to know.
 - MORE SPRING - learn what a REST API is: https://spring.io/guides/gs/rest-service. It is just an API using HTTP verbs like GET, POST, UPDATE - often used in to communicate with both clients and between services. 
+- Learn how to use the debugger - set a breakpoint and step through a program: https://www.youtube.com/watch?v=IeUZZoZE3sU
 
 Adavanced Projects:
 - Read and follow along the [Crafting Interpreters book](https://www.craftinginterpreters.com/contents.html). You will learn a ton about data structures and programming languages this way, and it's much more interesting than Spring webapps. HIGHLY RECOMMEND - taking a compilers course if often a defining moment in a CS degree where a lot of stuff clicks.
@@ -215,37 +229,104 @@ Additional:
 
 - JVM vs JDK vs JRE: https://stackoverflow.com/questions/11547458/what-is-the-difference-between-jvm-jdk-jre-openjdk
 - Deep dive on Java build systems (Maven and Gradle): https://news.ycombinator.com/item?id=38875318
-
+- l33t hacks in java: https://questdb.io/blog/1brc-merykittys-magic-swar/ - java is actually very performant and can be used for low level devlopment like C++ or C.
 
 ## Python
 
-Python is similar to Java because it is also object-oriented but is generally considered more of a 'scripting' language due to its dynamic typing and more interpreted nature (it's actually also (Just-in-Time) compiled to bytecode and runs in a VM but that is a detail). Coming from Java, you might appreciate its ergonomics and its relative ease of writing, in a styler sometimes closer to english. It also has its quirks however, e.g. the program entrypoint being just as cryptic as Java (`if __name__ == '__main__':`).
-
-It has some cool features like [list comprehensions](https://realpython.com/list-comprehension-python/).
+Python is similar to Java because it is also object-oriented but is generally considered more of a 'scripting' language due to its dynamic typing and more interpreted nature (it's actually also (Just-in-Time) compiled to bytecode and runs in a VM but that is a detail). Coming from Java, you might appreciate its ergonomics and its relative ease of writing, in a styler sometimes closer to english. It definitely has its quirks however, e.g. the program entrypoint being just as cryptic as Java (`if __name__ == '__main__':`), or that indentation has meaning.
 
 
 ### Setup a python dev environment.
 
-Easy, you should already have python installed. I like to use VSCode for python development, you could also use PyCharm (also from Jetbrains) but I find it clunky. `pip` is the default package manager and you will often use it to install librairies.
+Easy, you should already have python installed. I like to use VSCode for python development, you could also use Jetbrains PyCharm but I find it clunky. `pip` is the default package manager and you will often use it to install librairies. I would suggest installing the [Black formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter) plugin and enable format on save, the default settings are good and will ensur eyour code has a consistent style.
+
+It is recommended to setup a [virtual environment](https://docs.python.org/3/library/venv.html) for each python project. This isolates its packages and avoid version conflicts that could occur if we always installed packages globally (think 2 projects using different, incompatible versions of the same package). You can code python on windows.
+
+```bash
+# Create a virtual env - here you are invoking the venv module of python
+# You might have to install it separately on linux, follow instructions.
+# The virtual environment gets created in a .venv folder in the curent directory
+python -m venv .venv
+
+# Then activate the virtual env
+# On windows
+.venv\Scripts\activate
+# On linux
+source .venv/bin/activate
+
+```
+Now, when running pip, packages will be installed under the virtual environment directory.
+
+
+### Python 101
+
+Unlike Java, python ships with an interpreter (the `python` program itself) which means you can code in a much more interactive way, directly at the terminal. 
+
+Of course, the correct starting point are the [official tutorials](https://docs.python.org/3/tutorial/index.html) which you can skim through (or engage deeply with, you'll get something out of it for sure but it could be tedious depending on your learning style). It will be interesting to map python's data structures to Java's equivalents (i.e. what is dict in Java?), get a sense for the tradeoffs of static vs dynamic typing. 
+
+### Python projects
+
+- I love python for any small personal projects. I think it's well suited to write web scrapers which could be a good opportunity to get down and dirty with web technologies. Get to know the `requests` and `beautifulsoup` librairies: https://realpython.com/beautiful-soup-web-scraper-python/ output the data to a [csv file](https://docs.python.org/3/library/csv.html).
+- Add a database to your scraper to store your data: you can start with [SQLite](https://docs.python.org/3/library/sqlite3.html) which stores the DB in a simple file, move on to [PostgreSQL](https://www.psycopg.org/docs/) which is a more involved RDBMS (Relational DB Management System)
+- parallelize your scraper using the `multiprocessing` library: https://www.digitalocean.com/community/tutorials/python-multiprocessing-example. The python interpreter is single-threaded so multi processing is the way to do real parallelization in Python (vs multiple threads in Java).
+- Do web development with django: https://docs.djangoproject.com/en/5.0/intro/tutorial01/
+- Play around with ML models: https://huggingface.co/docs/transformers/tasks/object_detection
+
+
+Find tons of other project ideas: https://github.com/florinpop17/app-ideas?tab=readme-ov-file
+
+Additional:
+- (deep dive) explore concurrency in python general: https://realpython.com/python-concurrency/.
 
 
 
+# Leetcode - Data Structures and Algorithms
+
+As mentionned, Leetcode is the interview prep grind! Can't get around it, you might actually enjoy it. If you discover you do, you could start joining [competitive programming](https://en.wikipedia.org/wiki/Competitive_programming) groups and flex your skills (there's also [code golf](https://code.golf/) competitions but that's a different concept). Now that you've coded a bit in Java and Python, learned a few data structures like lists and maps (and perhaps what operations they optimize), it's time to dig deeper into these, as well as the algorithms used to implement data structure functionality. 
+
+This is where it gets a little mathematical, with the use of [big-O notation](https://web.mit.edu/16.070/www/lecture/big_o.pdf) (asymptotic performance) and general mathematical thinking to breakdown and solve problems.
+
+I would suggest going through the [Blind 75](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions) list of the necessary problems to prepare for interview. Ideally, you do one a day and spend some time researching the solution, come back to it later, try to solve it again. There is a ton of content, notably from [Neetcode](https://www.youtube.com/c/neetcode), and [video courses from MiT](https://www.youtube.com/watch?v=ZA-tUyM_y7s&list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY), Stanford, etc. to really get a deep understanding, proofs, etc. which could be worthwhile as a deep dive.
+
+Need to know:
+- Recursion/Divide and Conquer
+- How to use maps to speed up problems
+- Binary search
+- Sorting algorithms
+- What a Tree is, what a heap is
+- Graph traversal algorithms - BFS, DFS
+- Dynamic programming (similar to recursion)
+
+Good to know:
+- Tries - for language related tasks
+- 
 
 
+# Databases
+
+If you've done the above sections, you've already used SQL and setup your own databases, but you might not know what indices, primary and foreign keys, join operations are, so we'll deep dive into SQL here.
+SQL is required to know as a dev, not necessarily well as it gets complicated bu enough to get around, even in the NoSQL world of today (we'll get into this below), SQL is stil lth emain interface to DBs and non-relational DBs offer a SQL interface since it is a great way to write data queries. 
+
+## SQL
+
+Interactive tutorial: https://sqlbolt.com/lesson/select_queries_introduction
+
+- basic syntax, what a database is, what a table is
+- What an index is, what is it's purpose, what is the tradeoff we're doing: https://news.ycombinator.com/item?id=30594233
+- What is a primary key, what is a foreign key, what are joins?: https://news.ycombinator.com/item?id=32731916
+- What is normalized data? Why do we want to denormalize sometimes?
+- How to scale a database server? What is partitioning?
+- ACID
+- CAP Theorem
+
+## NoSQL
+
+In opposition to traditional SQL databases, NoSQL databases have emerged recently as more scalable replacements for "internet"-scale businesses. NoSQL is a large category and contains many completely different types of databases.
+
+Understand what an object store is (Amazon S3), what a Key-Value store is (dynamodb)
+Cassandra DB https://cassandra.apache.org/_/cassandra-basics.html
 
 
-WRITING CODE    
- - text editors and IDEs with syntax highlighting 
- - code style
- - linters and formatters
-
- # Databases
-
- ## SQL
-
- ## NoSQL
-
- 
 
 ## System Design and Architecture
 
@@ -257,12 +338,19 @@ Understand system architecture of common apps
 - https://www.youtube.com/watch?v=_K-eupuDVEc
 
 
-data stores - file system, databases (relational or "NoSQL")
+Good to know (at least conceptually):
+- What is a container, how is it different from a VM
+- What is a VPC
+- What is a container orchestrater (like Kubernetes)
+- 
 
-containers and vms - docker, kubernetes
-
-Additional:
+Additional reading:
 - The tail at scale: https://www.barroso.org/publications/TheTailAtScale.pdf
+
+
+L33t h4cks:
+
+
 
 
 ### Internet
