@@ -4,7 +4,7 @@
 
 Welcome to the wonderful world of software engineering, the modern world's wizardry guild, where incantations and arcane knowledge form the day-to-day, mythical forefathers have legends written about them and the holy grail of AGI has been 10 years away for the past 100 years. This document will be an evolving list of resources/suggested learning topics that I deem important for becoming a software engineer, as well as complementary topics to be more well rounded. 
 
-Software engineering is an enormous field with a wide range of niches and sub-fields, each with their relevant lore, coding practices, preferred languages, useful algorithms, math, etc. and it is not feasible for me to cover all of it, primarily due to lack of knowledge, hence this document will be more focused on learning the necessary to become a typical "backend" engineer, one of the most common types of engineer in entreprise and elligible to get that sweet big tech gig, or work for a variety of large institutions as well as a lot of startups and SMEs. Other types of software engineers might be "systems" engineers who work at a lower ["level of abstraction"](https://en.wikipedia.org/wiki/Abstraction_(computer_science)) (i.e. "closer to the metal") - they often do more "hardcore" work using more math, fancy data structures and algos, think deeply about performance - frontend engineers who do web development, think about UX, accessibility and work closely with designers and mobile engineers who build applications for mobile devices, writing "native" Android or iOS applications, or cross platform applications using technologies like React Native. Note that software engineering is a completetly separate function from entreprise IT which handles things like managing the company's internal network infrastructure, employee credentials, devices and system administration and are very concerned about security.
+Software engineering is an enormous field with a wide range of niches and sub-fields, each with their relevant lore, coding practices, preferred languages, useful algorithms, math, etc. and it is not feasible for me to cover all of it, primarily due to lack of knowledge, hence this document will be more focused on learning the necessary to become a typical "backend" engineer, one of the most common types of engineer in entreprise and elligible to get that sweet big tech gig, or work for a variety of large institutions as well as a lot of startups and SMEs. Other types of software engineers might be "systems" developers who work at a lower ["level of abstraction"](https://en.wikipedia.org/wiki/Abstraction_(computer_science)) (i.e. "closer to the metal") - they often do more "hardcore" work using more math, fancy data structures and algos, think deeply about performance - frontend engineers who do web development, think about UX, accessibility and work closely with designers and mobile engineers who build applications for mobile devices, writing "native" Android or iOS applications, or cross platform applications using technologies like React Native. Note that software engineering is a completetly separate function from entreprise IT which handles things like managing the company's internal network infrastructure, employee credentials, devices and system administration and are very concerned about security.
 
 Backend engineers write server code that powers the backend of applications and deal with flows of data to and from clients. A backend engineer can call themselves "full-stack" should they also learn enough front-end to implement their features end-to-end. Backend engineers mostly write "services" (server programs) defining useful APIs (set of functions you can invoke on the services - the program's interface) to serve data to their clients. These services often work together with other services (often in a microservice architecture - as opposed to monolithic) implementing separation of concern, as well as interacting with data stores. Backend engineers generally write code in [type-safe](https://en.wikipedia.org/wiki/Type_safety), [compiled](https://en.wikipedia.org/wiki/Compiler) languages like Java (and other JVM based languages like Kotlin, Scala), C++, Rust, Go, etc. with a target platform (the runtime environment) of a [UNIX-based](https://en.wikipedia.org/wiki/Unix) server (technically if you're using a JVM language, the target platform is the JVM but what I mean is your code is going to run on a UNIX server). Engineers also write automated tests to ensure the code does what it is supposed to, and to catch potential regressions when that code evolves. They use version control systems and repositories to collaborate with other programmers and manage the evolution and storage of code.
 
@@ -188,7 +188,8 @@ There are many versions of Java, old ones are confusingly referred to as e.g. Ja
 A similar programming language is C# by Microsoft, it's also object-oriented, statically typed, also targets a virtual machine (the .NET runtime) which also has supports other languages like F#. It's used a lot in Europe apparently, as well as to code in Unity and it is well loved by it's users.
 
 Need to know:
-- Inheritance and Composition - bread and butter of OOP
+- Inheritance and Composition - the bread and butter of OOP
+- What is Garbage Collection?
 - Dependency Injection (conceptually)
 
 ### Setting up a Java dev environment
@@ -312,7 +313,9 @@ SQL is required to know as a dev, not necessarily well as it gets complicated bu
 
 ## SQL
 
-Interactive tutorial: https://sqlbolt.com/lesson/select_queries_introduction
+Interactive tutorials: 
+- https://pgexercises.com/questions/basic/
+- https://sqlbolt.com/lesson/select_queries_introduction
 
 - basic syntax, what a database is, what a table is
 - What an index is, what is it's purpose, what is the tradeoff we're doing: https://news.ycombinator.com/item?id=30594233
@@ -331,7 +334,7 @@ Cassandra DB https://cassandra.apache.org/_/cassandra-basics.html
 
 
 
-## System Design and Architecture, infrastructure
+# System Design and Architecture, Infrastructure
 
 This is hard to get practical experience in as most personal projects don't need anywhere near the kind of complexity that is used in big entreprise. Therefore, I've personally mostly learned it by watching videos and reading big companies' engineering blogs.
 
@@ -350,9 +353,34 @@ Good to know (at least conceptually):
 - Horizontal vs Vertical scaling
 
 
-
 Additional reading:
 - The tail at scale: https://www.barroso.org/publications/TheTailAtScale.pdf
+- Latency Numbers Every Programmer Should Know: (https://gist.github.com/jboner/2841832)
 
+
+# So you want to do systems dev?
+
+Let us first try to define systems development/programming as it is a bit fuzzy. We won't use the term 'systems engineering' as that is a separate "traditional" engineering discipline. In some [university programs](https://www.cs.mcgill.ca/graduate/masters/breadthrequirement/), the term is used to refer to work on compilers, database systems and distributed systems which all require working at and understanding pretty low levels of the metaphorical stack of abstractions starting from hardware. Compilers have to emit CPU instructions and require an understanding of the target ISAs, database systems generally manage their [memory directly](https://stackoverflow.com/questions/3171919/why-cant-dmbses-rely-on-the-os-buffer-pool) reimplementing some OS functionality and distributed systems (which can include databases) have to deal with hard physical problems related to synchronisation across space and time.  
+Some people use an axis of [application vs systems](https://news.ycombinator.com/item?id=27584443) development to define it. Within this new split, a systems programmer develops software that run below applications and power them. 
+
+In general systems programming necessitates deeper knowledge of how things works under the hood, as well as strong algorithms and data structure knowledge to be able to design and implement correct, and performant code. Software that, to me, qualifies as "systems" work would be: operating systems, drivers, web browsers, compilers, databases, game engines, virtualization platforms, video/audio codecs, deep learning training frameworks, other specialized systems.
+
+Some discussion on the subject:
+[Ask HN: What should a systems/low-level software engineer know?](https://news.ycombinator.com/item?id=18881649) 
+[Ask HN: How to learn proper systems programming?](https://news.ycombinator.com/item?id=27577514)
+[Ask HN: Is it hard to get into systems programming from back end engineer?](https://news.ycombinator.com/item?id=32915350)
+
+
+Some resources:
+- C/C++ projects: https://github.com/practical-tutorials/project-based-learning?tab=readme-ov-file#cc
+- Rust projects: https://github.com/rust-unofficial/awesome-rust
+- Kafka architecture: https://www.youtube.com/watch?v=HZklgPkboro
+- Why Doom is Awesome: https://www.youtube.com/watch?v=hYMZsMMlubg
+- Cool audio/video project: https://www.youtube.com/watch?v=MEMzo59CPr8&list=PLKucWgGjAuTbobNC28EaR9lbGQTVyD9IS&index=2
+
+
+YouTube channels / streamers:
+- https://www.youtube.com/user/gamozolabs/videos
+- https://www.youtube.com/@TsodingDaily/featured
 
 
